@@ -14,14 +14,55 @@ Hours Worked: 33.5
 Sales Commission: 1.5%
 Total Sales: $65,000.00
 
-Total Earnings: $1184.38
+(Hourly rate * Hours Worked) + (Total Sales * Sales Commission) = Total Earnings
+The Total Earnings: $1184.38
 
  */
 
+
+import javax.swing.*;
+import java.text.DecimalFormat;
+
+/* Get inputs
+       Calculate Total Pay; Hourly rate * Hours Worked
+       Calculate Total Sale; Sales Commission * Total Sales
+       Display Results - 2 decimals
+     */
 public class SalesCommission {
 
     public static void main(String[] args) {
 
+        double hours = getInput("How many hours did you work?(Between 30 and 40 hours)");
+        double wage = getInput("How much are you paid an hour?(Between $5.00 and $8.00)");
+        double salesCom = getInput("What was your sales commission?");
+        double totalSales = getInput("What was your total sales?");
+
+
+        double totalEarnings = totalPay(hours, wage, salesCom, totalSales);
+
+        outputResults(totalEarnings);
+
+        System.exit(0);
+    }
+
+    public static double getInput(String message){
+        return Double.parseDouble(JOptionPane.showInputDialog(message));
+    }
+
+
+    public static double totalPay(double hours, double wage, double salesCom, double totalSales){
+        salesCom = salesCom * .01;
+
+        return (salesCom * totalSales) + (hours * wage);
+
+
+
+    }
+    public static void outputResults(double totalEarnings){
+        DecimalFormat round = new DecimalFormat("#,###.##");
+
+
+       JOptionPane.showMessageDialog(null, "The Total Earnings is: " + round.format(totalEarnings));
     }
 
 }
